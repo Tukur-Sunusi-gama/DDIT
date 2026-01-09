@@ -42,17 +42,24 @@ export const Services = () => (
 
     <div className="grid md:grid-cols-2 gap-8">
       {services.map((s, i) => (
+        // Find this line inside your services.map:
         <div
           key={i}
-          className="group p-10 bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-[--color-primary]/20 transition-all duration-300"
+          className="card-surface group p-10 rounded-3xl hover:shadow-xl hover:border-[--color-primary]/20 transition-all duration-300"
         >
           <div
             className={`w-14 h-14 ${s.color} rounded-2xl flex items-center justify-center mb-6`}
           >
             <s.icon size={28} />
           </div>
-          <h3 className="text-2xl font-bold mb-4">{s.title}</h3>
-          <p className="text-gray-600 leading-relaxed mb-8">{s.desc}</p>
+          {/* The text colors will automatically handle themselves if we use slate-900 and gray-600 */}
+          <h3 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">
+            {s.title}
+          </h3>
+          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
+            {s.desc}
+          </p>
+
           <Link
             to="/dashboard"
             className="inline-flex items-center gap-2 font-bold text-[--color-primary] hover:gap-3 transition-all"

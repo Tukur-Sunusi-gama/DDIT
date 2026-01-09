@@ -53,7 +53,7 @@ export const Auth = () => {
               type="email"
               placeholder="Email Address"
               required
-              className="w-full pl-12 pr-4 py-3.5 bg-accent rounded-xl border-none focus:ring-2 focus:ring-[--color-primary] transition-all"
+              className="w-full pl-12 pr-4 py-3.5 bg-gray-50 rounded-xl border-none focus:ring-2 focus:ring-blue-600 transition-all"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -63,14 +63,14 @@ export const Auth = () => {
               type="password"
               placeholder="Password"
               required
-              className="w-full pl-12 pr-4 py-3.5 bg-accent rounded-xl border-none focus:ring-2 focus:ring-[--color-primary] transition-all"
+              className="w-full pl-12 pr-4 py-3.5 bg-gray-50 rounded-xl border-none focus:ring-2 focus:ring-blue-600 transition-all"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
           <button
             disabled={loading}
-            className="w-full bg-[--color-primary] text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-blue-700 transition-all disabled:opacity-50"
+            className="w-full bg-blue-600 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-blue-700 transition-all disabled:opacity-50"
           >
             {loading ? (
               "Processing..."
@@ -90,7 +90,7 @@ export const Auth = () => {
           {isLogin ? "Don't have an account?" : "Already have an account?"}
           <button
             onClick={() => setIsLogin(!isLogin)}
-            className="ml-2 text-[--color-primary] font-bold hover:underline"
+            className="ml-2 text-blue-600 font-bold hover:underline"
           >
             {isLogin ? "Register Now" : "Login"}
           </button>

@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 export const Home = () => (
   <div className="flex flex-col">
     <section className="pt-32 pb-20 px-6 text-center">
-      <h1 className="text-6xl md:text-7xl font-black tracking-tight text-slate-900 mb-6">
+      <h1 className="text-6xl md:text-7xl font-black tracking-tight text-black mb-6">
         Software Engineering <br />
-        <span className="text-[--color-primary]">Perfected.</span>
+        <span className="text-blue-600">Perfected.</span>
       </h1>
       <p className="max-w-2xl mx-auto text-xl text-gray-600 mb-10 leading-relaxed">
         Double Digit IT Solutions provides premium SaaS development, web design,
@@ -16,7 +16,7 @@ export const Home = () => (
       <div className="flex flex-col md:flex-row gap-4 justify-center">
         <Link
           to="/dashboard"
-          className="bg-[--color-primary] text-white px-10 py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 hover:translate-y-[-2px] transition-all"
+          className="bg-blue-600 text-white px-10 py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 hover:translate-y-[-2px] transition-all"
         >
           Get a Quote <ArrowRight size={20} />
         </Link>
@@ -37,7 +37,7 @@ export const Home = () => (
               key={item}
               className="flex items-center justify-center gap-3 text-lg font-semibold text-slate-700"
             >
-              <CheckCircle2 className="text-[--color-secondary]" />
+              <CheckCircle2 className="text-green-500" />
               {item}
             </div>
           )

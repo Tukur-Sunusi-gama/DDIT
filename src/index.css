@@ -1,13 +1,12 @@
 @import "tailwindcss";
 
-@theme {
-  --color-primary: #2d5bff;
-  --color-secondary: #00e676;
-  --color-accent: #f8fafc;
+body {
+  background-color: #f9fafb;
+  color: #111827;
 }
 
-@layer base {
-  body {
-    @apply bg-[--color-accent] text-slate-900 antialiased;
-  }
+.card-surface {
+  background-color: #ffffff;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
