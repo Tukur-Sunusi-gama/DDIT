@@ -17,6 +17,7 @@ import { About } from "./pages/About";
 import { Contact } from "./pages/Contact";
 import { Auth } from "./pages/Auth";
 import { Dashboard } from "./pages/Dashboard";
+import { Footer } from "./components/Footer";
 
 function App() {
   const [session, setSession] = useState<any>(null);
@@ -78,10 +79,7 @@ function App() {
         </main>
 
         {/* Optional: Simple Footer */}
-        <footer className="bg-white border-t border-gray-100 py-10 text-center text-gray-500 text-sm">
-          &copy; {new Date().getFullYear()} Double Digit IT Solutions. All
-          rights reserved.
-        </footer>
+        <Footer />
       </div>
     </Router>
   );
