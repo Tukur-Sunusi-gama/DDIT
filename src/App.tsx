@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { Home } from "./pages/Home";
+import { Services } from "./pages/Services";
+import { About } from "./pages/About";
 
 // We'll create the empty versions of these next
 const Placeholder = ({ name }: { name: string }) => (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/contact" element={<Placeholder name="Contact" />} />
         <Route path="/dashboard" element={<Placeholder name="Dashboard" />} />
         <Route path="/login" element={<Placeholder name="Login" />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </Router>
   );
