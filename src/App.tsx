@@ -22,6 +22,18 @@ import { Footer } from "./components/Footer";
 function App() {
   const [session, setSession] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    const stored = localStorage.getItem("theme");
+    if (stored === "light" || stored === "dark") {
+      return stored;
+    }
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  });
+  const [themeSource, setThemeSource] = useState<"system" | "user">(() =>
+    localStorage.getItem("theme") ? "user" : "system"
+  );
 
   useEffect(() => {
     // 1. Check current session on load
@@ -40,6 +52,27 @@ function App() {
     return () => subscription.unsubscribe();
   }, []);
 
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  useEffect(() => {
+    if (themeSource !== "system") return;
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = (event: MediaQueryListEvent) => {
+      setTheme(event.matches ? "dark" : "light");
+    };
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, [themeSource]);
+
+  const handleThemeToggle = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    setThemeSource("user");
+    localStorage.setItem("theme", nextTheme);
+  };
+
   if (loading) {
     return (
       <div className="h-screen flex items-center justify-center">
@@ -51,7 +84,7 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen flex flex-col">
-        <Navbar />
+        <Navbar theme={theme} onToggleTheme={handleThemeToggle} />
 
         <main className="flex-grow">
           <Routes>

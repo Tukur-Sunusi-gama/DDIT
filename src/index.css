@@ -1,12 +1,69 @@
 @import "tailwindcss";
 
+:root {
+  color-scheme: light dark;
+  --color-primary: #2563eb;
+  --color-secondary: #10b981;
+  --color-text: #111827;
+  --color-muted: #6b7280;
+  --color-surface: #ffffff;
+  --color-border: #e5e7eb;
+  --color-accent: #f3f4f6;
+  --shadow-soft: 0 1px 3px 0 rgb(0 0 0 / 0.1),
+    0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #60a5fa;
+    --color-secondary: #34d399;
+    --color-text: #e5e7eb;
+    --color-muted: #9ca3af;
+    --color-surface: #0f172a;
+    --color-border: #1f2937;
+    --color-accent: #111827;
+    --shadow-soft: 0 1px 3px 0 rgb(0 0 0 / 0.4),
+      0 1px 2px -1px rgb(0 0 0 / 0.4);
+  }
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-primary: #2563eb;
+  --color-secondary: #10b981;
+  --color-text: #111827;
+  --color-muted: #6b7280;
+  --color-surface: #ffffff;
+  --color-border: #e5e7eb;
+  --color-accent: #f3f4f6;
+  --shadow-soft: 0 1px 3px 0 rgb(0 0 0 / 0.1),
+    0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-primary: #60a5fa;
+  --color-secondary: #34d399;
+  --color-text: #e5e7eb;
+  --color-muted: #9ca3af;
+  --color-surface: #0f172a;
+  --color-border: #1f2937;
+  --color-accent: #111827;
+  --shadow-soft: 0 1px 3px 0 rgb(0 0 0 / 0.4),
+    0 1px 2px -1px rgb(0 0 0 / 0.4);
+}
+
 body {
-  background-color: #f9fafb;
-  color: #111827;
+  background-color: var(--color-accent);
+  color: var(--color-text);
 }
 
 .card-surface {
-  background-color: #ffffff;
-  border: 1px solid #f3f4f6;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+}
+
+.bg-accent {
+  background-color: var(--color-accent);
 }

@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Monitor, Menu, X, User, LogOut } from "lucide-react";
+import { Menu, X, User, LogOut, Sun, Moon } from "lucide-react";
 import { supabase } from "../api/supabaseClient";
 
-export const Navbar = () => {
+type NavbarProps = {
+  theme: "light" | "dark";
+  onToggleTheme: () => void;
+};
+
+export const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -21,14 +26,18 @@ export const Navbar = () => {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-white backdrop-blur-md border-b border-gray-100">
+    <nav className="sticky top-0 z-50 bg-[var(--color-surface)] backdrop-blur-md border-b border-[var(--color-border)]">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link
           to="/"
-          className="flex items-center gap-2 font-bold text-2xl text-blue-600"
+          className="flex items-center gap-3 font-bold text-2xl text-[var(--color-primary)]"
         >
-          <Monitor size={32} />
+          <img
+            src="/images/ddit%20logo%202.jpeg"
+            alt="DDIT"
+            className="h-10 w-10 rounded-full object-cover"
+          />
           <span>DDIT</span>
         </Link>
 
@@ -38,21 +47,29 @@ export const Navbar = () => {
             <Link
               key={link.name}
               to={link.path}
-              className="text-slate-900 hover:text-blue-600 transition-colors"
+            className="text-[var(--color-text)] hover:text-[var(--color-primary)] transition-colors"
             >
               {link.name}
             </Link>
           ))}
           <Link
             to="/dashboard"
-            className="flex items-center gap-2 bg-blue-600 text-white px-6 py-2.5 rounded-full hover:shadow-lg hover:shadow-blue-200 transition-all"
+            className="flex items-center gap-2 bg-[var(--color-primary)] text-white px-6 py-2.5 rounded-full hover:shadow-lg transition-all"
           >
             <User size={18} />
             Client Area
           </Link>
           <button
+            onClick={onToggleTheme}
+            className="p-2 rounded-full bg-[var(--color-accent)] text-[var(--color-text)] hover:text-[var(--color-primary)] transition-colors"
+            aria-label="Toggle color theme"
+            type="button"
+          >
+            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+          <button
             onClick={handleLogout}
-            className="text-gray-400 hover:text-red-500 transition-colors"
+            className="text-[var(--color-muted)] hover:text-red-500 transition-colors"
           >
             <LogOut size={20} />
           </button>
@@ -60,7 +77,7 @@ export const Navbar = () => {
 
         {/* Mobile Toggle Button */}
         <button
-          className="md:hidden p-2 text-slate-600"
+          className="md:hidden p-2 text-[var(--color-text)]"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -69,14 +86,14 @@ export const Navbar = () => {
 
       {/* Mobile Menu Container */}
       {isOpen && (
-        <div className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-gray-100 shadow-xl animate-in slide-in-from-top duration-300">
+        <div className="md:hidden absolute top-20 left-0 w-full bg-[var(--color-surface)] border-b border-[var(--color-border)] shadow-xl animate-in slide-in-from-top duration-300">
           <div className="flex flex-col p-6 gap-4 font-semibold">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
-                className="text-slate-900 text-lg py-2 border-b border-gray-50 last:border-0"
+                className="text-[var(--color-text)] text-lg py-2 border-b border-[var(--color-border)] last:border-0"
               >
                 {link.name}
               </Link>
@@ -84,10 +101,25 @@ export const Navbar = () => {
             <Link
               to="/dashboard"
               onClick={() => setIsOpen(false)}
-              className="flex items-center justify-center gap-2 bg-blue-600 text-white py-4 rounded-xl mt-2"
+              className="flex items-center justify-center gap-2 bg-[var(--color-primary)] text-white py-4 rounded-xl mt-2"
             >
               <User size={18} /> Dashboard
             </Link>
+            <button
+              onClick={onToggleTheme}
+              className="flex items-center justify-center gap-2 bg-[var(--color-accent)] text-[var(--color-text)] py-3 rounded-xl"
+              type="button"
+            >
+              {theme === "dark" ? (
+                <>
+                  <Sun size={18} /> Light Mode
+                </>
+              ) : (
+                <>
+                  <Moon size={18} /> Dark Mode
+                </>
+              )}
+            </button>
             <button
               onClick={handleLogout}
               className="flex items-center justify-center gap-2 text-red-500 py-2"

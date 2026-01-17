@@ -51,16 +51,16 @@ export const Dashboard = () => {
       {/* Quote Submission Form */}
       <div className="lg:col-span-1">
         <div className="card-surface p-8 rounded-3xl sticky top-28">
-          <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-slate-900">
-            <Package className="text-blue-600" /> New Request
+          <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-[var(--color-text)]">
+            <Package className="text-[var(--color-primary)]" /> New Request
           </h3>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="text-sm font-semibold text-gray-700">
+              <label className="text-sm font-semibold text-[var(--color-muted)]">
                 Service Required
               </label>
               <select
-                className="w-full mt-1 p-3 bg-gray-50 rounded-lg border-none focus:ring-2 focus:ring-blue-600"
+                className="w-full mt-1 p-3 bg-[var(--color-accent)] rounded-lg border-none focus:ring-2 focus:ring-[var(--color-primary)]"
                 onChange={(e) =>
                   setForm({ ...form, service_type: e.target.value })
                 }
@@ -72,12 +72,12 @@ export const Dashboard = () => {
               </select>
             </div>
             <div>
-              <label className="text-sm font-semibold text-gray-700">
+              <label className="text-sm font-semibold text-[var(--color-muted)]">
                 Project Description
               </label>
               <textarea
                 required
-                className="w-full mt-1 p-3 bg-gray-50 rounded-lg border-none focus:ring-2 focus:ring-blue-600 h-32"
+                className="w-full mt-1 p-3 bg-[var(--color-accent)] rounded-lg border-none focus:ring-2 focus:ring-[var(--color-primary)] h-32"
                 placeholder="Briefly explain what you need..."
                 onChange={(e) =>
                   setForm({ ...form, description: e.target.value })
@@ -86,7 +86,7 @@ export const Dashboard = () => {
             </div>
             <button
               disabled={loading}
-              className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-blue-700 transition-all"
+              className="w-full bg-[var(--color-primary)] text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all"
             >
               {loading ? (
                 "Submitting..."
@@ -102,12 +102,12 @@ export const Dashboard = () => {
 
       {/* Quote History */}
       <div className="lg:col-span-2">
-        <h3 className="text-xl font-bold mb-6 text-slate-900">
+        <h3 className="text-xl font-bold mb-6 text-[var(--color-text)]">
           Your Request History
         </h3>
         {quotes.length === 0 ? (
-          <div className="bg-white p-10 rounded-3xl text-center border-2 border-dashed border-gray-200">
-            <p className="text-gray-400">
+          <div className="bg-[var(--color-surface)] p-10 rounded-3xl text-center border-2 border-dashed border-[var(--color-border)]">
+            <p className="text-[var(--color-muted)]">
               No requests found. Submit your first quote request to get started.
             </p>
           </div>
@@ -119,17 +119,17 @@ export const Dashboard = () => {
                 className="card-surface p-6 rounded-2xl flex justify-between items-center"
               >
                 <div>
-                  <h4 className="font-bold text-slate-900">
+                  <h4 className="font-bold text-[var(--color-text)]">
                     {quote.service_type}
                   </h4>
-                  <p className="text-gray-500 text-sm line-clamp-1">
+                  <p className="text-[var(--color-muted)] text-sm line-clamp-1">
                     {quote.description}
                   </p>
-                  <span className="text-[10px] uppercase tracking-widest text-gray-400 font-bold">
+                  <span className="text-[10px] uppercase tracking-widest text-[var(--color-muted)] font-bold">
                     {new Date(quote.created_at).toLocaleDateString()}
                   </span>
                 </div>
-                <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase">
+                <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--color-accent)] text-[var(--color-primary)] text-xs font-bold uppercase">
                   {quote.status === "pending" ? (
                     <Clock size={14} />
                   ) : (
