@@ -1,4 +1,4 @@
-import { ArrowRight, Boxes, Building2, Globe2 } from "lucide-react";
+import { ArrowRight, Boxes, Building2, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const Home = () => (
@@ -37,19 +37,21 @@ export const Home = () => (
             desc: "Launch scalable platforms built for growth and reliability.",
             icon: Boxes,
             href: "/services",
+            image: "/images/SaaS.png",
           },
           {
             title: "CAC Registration",
             desc: "Fast-track your business compliance and legal setup.",
             icon: Building2,
-            href: "/services",
+            href: "/cac",
             image: "/images/cac%20card.jpeg",
           },
           {
-            title: "Web Architecture",
-            desc: "Modern web systems with clean UI and solid performance.",
-            icon: Globe2,
+            title: "Business & IT Consultancy",
+            desc: "Strategic tech guidance to align systems with business goals.",
+            icon: ShieldCheck,
             href: "/services",
+            image: "/images/business-it-consultancy.png",
           },
         ].map((item) => (
           <Link

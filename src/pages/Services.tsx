@@ -13,12 +13,14 @@ const services = [
     desc: "Modern, high-converting websites that prioritize user experience and brand identity.",
     icon: Layout,
     color: "bg-[var(--color-accent)] text-[var(--color-secondary)]",
+    image: "/images/web%20design.png",
   },
   {
     title: "CAC Registration",
     desc: "Professional business and company registration services to get your firm legally recognized.",
     icon: Landmark,
     color: "bg-[var(--color-accent)] text-[var(--color-primary)]",
+    href: "/cac",
   },
   {
     title: "IT Consultancy",
@@ -61,7 +63,7 @@ export const Services = () => (
           </p>
 
           <Link
-            to="/dashboard"
+            to={s.href ?? "/dashboard"}
             className="inline-flex items-center gap-2 font-bold text-[var(--color-primary)] hover:gap-3 transition-all"
           >
             Get Started <ArrowRight size={18} />

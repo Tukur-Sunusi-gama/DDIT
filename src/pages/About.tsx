@@ -1,4 +1,4 @@
-import { Award, Target, Users } from "lucide-react";
+import { Award, Target } from "lucide-react";
 
 export const About = () => (
   <div className="py-24 px-6 max-w-7xl mx-auto">

@@ -6,9 +6,10 @@ import { supabase } from "../api/supabaseClient";
 type NavbarProps = {
   theme: "light" | "dark";
   onToggleTheme: () => void;
+  isAdmin: boolean;
 };
 
-export const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
+export const Navbar = ({ theme, onToggleTheme, isAdmin }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -47,11 +48,19 @@ export const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
             <Link
               key={link.name}
               to={link.path}
-            className="text-[var(--color-text)] hover:text-[var(--color-primary)] transition-colors"
+              className="text-[var(--color-text)] hover:text-[var(--color-primary)] transition-colors"
             >
               {link.name}
             </Link>
           ))}
+          {isAdmin && (
+            <Link
+              to="/admin"
+              className="text-[var(--color-text)] hover:text-[var(--color-primary)] transition-colors"
+            >
+              Admin
+            </Link>
+          )}
           <Link
             to="/dashboard"
             className="flex items-center gap-2 bg-[var(--color-primary)] text-white px-6 py-2.5 rounded-full hover:shadow-lg transition-all"
@@ -98,6 +107,15 @@ export const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
                 {link.name}
               </Link>
             ))}
+            {isAdmin && (
+              <Link
+                to="/admin"
+                onClick={() => setIsOpen(false)}
+                className="text-[var(--color-text)] text-lg py-2 border-b border-[var(--color-border)]"
+              >
+                Admin
+              </Link>
+            )}
             <Link
               to="/dashboard"
               onClick={() => setIsOpen(false)}

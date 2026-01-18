@@ -1,38 +1,60 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "../api/supabaseClient";
 import { Send, Clock, CheckCircle, Package } from "lucide-react";
 
+type Quote = {
+  id: string;
+  service_type: string;
+  description: string;
+  status: string;
+  created_at: string;
+};
+
 export const Dashboard = () => {
   const [loading, setLoading] = useState(false);
-  const [quotes, setQuotes] = useState<any[]>([]);
+  const [quotes, setQuotes] = useState<Quote[]>([]);
+  const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({
     service_type: "SaaS Development",
     description: "",
   });
 
   // Fetch user's previous quotes
-  const fetchQuotes = async () => {
+  const fetchQuotes = useCallback(async () => {
+    setError(null);
     const {
       data: { user },
     } = await supabase.auth.getUser();
+    if (!user?.id) {
+      setQuotes([]);
+      setError("You must be signed in to view requests.");
+      return;
+    }
     const { data } = await supabase
       .from("quotes")
       .select("*")
       .eq("user_id", user?.id)
       .order("created_at", { ascending: false });
     if (data) setQuotes(data);
-  };
+  }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchQuotes();
-  }, []);
+  }, [fetchQuotes]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
     const {
       data: { user },
     } = await supabase.auth.getUser();
+    if (!user?.id) {
+      setLoading(false);
+      setError("You must be signed in to submit a request.");
+      return;
+    }
 
     const { error } = await supabase
       .from("quotes")
@@ -42,6 +64,8 @@ export const Dashboard = () => {
       alert("Quote request submitted!");
       setForm({ ...form, description: "" });
       fetchQuotes();
+    } else {
+      setError(error.message);
     }
     setLoading(false);
   };
@@ -105,6 +129,11 @@ export const Dashboard = () => {
         <h3 className="text-xl font-bold mb-6 text-[var(--color-text)]">
           Your Request History
         </h3>
+        {error && (
+          <div className="bg-[var(--color-surface)] p-6 rounded-2xl text-center text-red-500 border border-[var(--color-border)] mb-4">
+            {error}
+          </div>
+        )}
         {quotes.length === 0 ? (
           <div className="bg-[var(--color-surface)] p-10 rounded-3xl text-center border-2 border-dashed border-[var(--color-border)]">
             <p className="text-[var(--color-muted)]">

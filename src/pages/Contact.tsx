@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Linkedin, Globe } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 
 export const Contact = () => (
   <div className="py-24 px-6 max-w-7xl mx-auto">
@@ -51,7 +51,13 @@ export const Contact = () => (
 
       {/* Quick Form */}
       <div className="bg-[var(--color-surface)] p-8 rounded-3xl shadow-xl border border-[var(--color-border)]">
-        <form className="space-y-4">
+        <form
+          className="space-y-4"
+          onSubmit={(e) => {
+            e.preventDefault();
+            alert("Thanks! We will get back to you soon.");
+          }}
+        >
           <div className="grid grid-cols-2 gap-4">
             <input
               type="text"
